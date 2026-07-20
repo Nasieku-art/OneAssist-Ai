@@ -12,13 +12,13 @@ export default function AccessibilityToolbar() {
             onClick={() => document.documentElement.classList.toggle('high-contrast')}
             className="w-full text-left p-2 rounded hover:bg-slate-100 border border-slate-200 font-medium"
           >
-            👁️ Toggle High Contrast
+            Toggle High Contrast
           </button>
           <button 
             onClick={() => document.documentElement.classList.toggle('text-large')}
             className="w-full text-left p-2 rounded hover:bg-slate-100 border border-slate-200 font-medium"
           >
-            🔍 Toggle Large Text
+            Toggle Large Text
           </button>
         </div>
       )}

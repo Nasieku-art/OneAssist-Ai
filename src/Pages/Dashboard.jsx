@@ -1,4 +1,4 @@
-import Dash from
+import Dash from "../Components/Dash";
 
 function Dashboard() {
   return (

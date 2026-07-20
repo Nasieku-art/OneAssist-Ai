@@ -25,7 +25,7 @@ export default function AccessibilityToolbar() {
 
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-amber-400 flex items-center gap-2"
+        className="bg-teal-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-amber-400 flex items-center gap-2"
         aria-label="Accessibility Options"
       >
         <span className="text-xl">♿</span>

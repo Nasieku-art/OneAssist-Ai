@@ -1,4 +1,4 @@
-
+import Sign from "../Components/Sign";
 function SignUp(){
     return(
         <div>

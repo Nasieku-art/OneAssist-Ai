@@ -1,3 +1,4 @@
+import Log from "../Components/Log";
 function Login(){
     return(
         <div>

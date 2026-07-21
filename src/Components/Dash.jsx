@@ -86,7 +86,7 @@ function Dash() {
           {activeTab === 'Dashboard' && (
             <div className="space-y-6">
               <div className="p-6 bg-gradient-to-r from-teal-500 to-teal-700 rounded-2xl text-white shadow-md">
-                <h2 className="text-2xl font-bold">Karibu, {fullName}! 👋</h2>
+                <h2 className="text-2xl font-bold">Karibu, {fullName}!</h2>
                 <p className="mt-1 text-teal-100 text-sm">Your digital workspace is currently adapted for your comfort and ease of use.</p>
               </div>
 

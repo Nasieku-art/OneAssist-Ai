@@ -2,7 +2,8 @@ import Dash from "../Components/Dash";
 
 function Dashboard() {
   return (
-    <div>
+    <div className="container mx-auto">
+        
       <Dash/>
     </div>
   );

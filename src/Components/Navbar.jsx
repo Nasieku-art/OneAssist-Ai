@@ -10,6 +10,8 @@ const getInitials = (fullName) => {
 };
 
 function Navbar({ isAuthenticated, fullName, onProfileClick }) {
+
+    console.log("Full Name received:",fullName)
   return (
     <div className="container mx-auto">
       <nav className="bg-teal-600 text-white px-6 py-4 shadow-md flex justify-between items-center">

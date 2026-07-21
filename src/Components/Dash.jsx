@@ -1,9 +1,6 @@
-function Dash(){
-    return(
-        <div className="container mx-auto">
-            import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// Helper for initials
+
 const getInitials = (fullName) => {
   if (!fullName) return 'U';
   const parts = fullName.trim().split(/\s+/);
@@ -14,7 +11,7 @@ const getInitials = (fullName) => {
 export default function OneAssistDashboard() {
   const [fullName] = useState('Amina Mwangi');
   
-  // Mock accessibility preferences saved by the user during onboarding
+  
   const [preferences, setPreferences] = useState({
     language: 'Kiswahili',
     largeText: true,
@@ -30,14 +27,14 @@ export default function OneAssistDashboard() {
   return (
     <div className="flex h-screen bg-gray-50 font-sans">
       
-      {/* --- SIDEBAR --- */}
+      
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between p-6">
         <div>
-          <div className="text-xl font-bold text-indigo-600 mb-8 tracking-tight">
-            OneAssist <span className="text-xs px-2 py-0.5 bg-indigo-100 text-indigo-700 rounded-full font-normal">AI</span>
+          <div className="text-xl font-bold text-teal-600 mb-8 tracking-tight">
+            OneAssist <span className="text-xs px-2 py-0.5 bg-indigo-100 text-teal-700 rounded-full font-normal">AI</span>
           </div>
           <nav className="space-y-2">
-            <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg">Dashboard</a>
+            <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-teal-600 bg-indigo-50 rounded-lg">Dashboard</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Accessibility Settings</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Language & Voice</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Help & Support</a>
@@ -46,14 +43,13 @@ export default function OneAssistDashboard() {
         <div className="text-xs text-gray-400">OneAssist AI v1.0 (Demo)</div>
       </aside>
 
-      {/* --- MAIN CONTENT CONTAINER --- */}
+    
       <div className="flex-1 flex flex-col overflow-hidden">
-        
-        {/* TOP HEADER */}
+      
         <header className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
           <h1 className="text-lg font-semibold text-gray-800">Your Accessibility Hub</h1>
           
-          {/* User Profile Avatar Top Right */}
+      
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium text-gray-700 hidden sm:inline">{fullName}</span>
             <div 
@@ -65,16 +61,15 @@ export default function OneAssistDashboard() {
           </div>
         </header>
 
-        {/* DASHBOARD BODY */}
+     
         <main className="flex-1 overflow-y-auto p-8 space-y-6">
           
-          {/* Welcome Banner */}
-              <div className="p-6 bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl text-white shadow-md">
+         
+              <div className="p-6 bg-gradient-to-r from-teal-300 to-teal-600 rounded-2xl text-white shadow-md">
             <h2 className="text-2xl font-bold">Karibu, {fullName}! 👋</h2>
             <p className="mt-1 text-indigo-100 text-sm">Your digital workspace is currently adapted for your comfort and ease of use.</p>
           </div>
 
-          {/* Active Features Quick Summary */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
               <p className="text-sm text-gray-500">Active Language</p>
@@ -92,7 +87,7 @@ export default function OneAssistDashboard() {
             </div>
           </div>
 
-          {/* Interactive Accessibility Toggle Panel */}
+         
           <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm space-y-4">
             <div>
               <h3 className="text-base font-semibold text-gray-800">Quick Accessibility Adjustments</h3>
@@ -147,9 +142,3 @@ export default function OneAssistDashboard() {
     </div>
   );
 }
-           
-        </div>
-
-    )
-}
-export default Dash;

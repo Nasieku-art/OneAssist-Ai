@@ -6,7 +6,7 @@ import {Eye,EyeOff,Globe,Volume2,ChevronDown,ArrowRight,Check,
 const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
  function Sign() {
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassWord, setShowPassWord] = useState(false);
   const [lang, setLang] = useState("English");
   const [langOpen, setLangOpen] = useState(false);
   const [readAloud, setReadAloud] = useState(false);

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import {LayoutDashboard,PersonStanding,Speech,Headset} from "lucide-react"
+import React, { useState, useEffect } from 'react';
+import { LayoutDashboard, PersonStanding, Speech, Headset } from "lucide-react";
 
 const getInitials = (fullName) => {
   if (!fullName) return 'U';
@@ -8,29 +8,61 @@ const getInitials = (fullName) => {
   return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
 };
 
+const speakText = (text, language = 'Kiswahili') => {
+  if (!('speechSynthesis' in window)) return;
+  
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+ 
+  utterance.lang = language === 'Kiswahili' ? 'sw-KE' : 'en-KE';
+  utterance.rate = 1.0; 
+
+  window.speechSynthesis.speak(utterance);
+};
+
 function Dash() {
   const [fullName] = useState('Mary Nasieku');
   const [activeTab, setActiveTab] = useState('Dashboard');
   
- 
   const [preferences, setPreferences] = useState({
     language: 'Kiswahili',
     largeText: true,
     highContrast: false,
-    textToSpeech: true,
+    textToSpeech: true, 
     dataSaver: false,
     screenReader: true,
     voiceSpeed: '1.0x (Normal)',
   });
 
   const togglePreference = (key) => {
-    setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
+    const newState = !preferences[key];
+    setPreferences(prev => ({ ...prev, [key]: newState }));
+
+   
+    if (key === 'textToSpeech' && newState === true) {
+      const msg = preferences.language === 'Kiswahili' 
+        ? "Kusoma maandishi kwa sauti kumewashwa." 
+        : "Text to speech mode has been enabled.";
+      speakText(msg, preferences.language);
+    }
   };
+
+  useEffect(() => {
+    if (preferences.textToSpeech) {
+      const msg = preferences.language === 'Kiswahili'
+        ? `Uko kwenye sehemu ya ${activeTab}`
+        : `You are now viewing ${activeTab}`;
+      
+      const timer = setTimeout(() => speakText(msg, preferences.language), 300);
+      return () => clearTimeout(timer);
+    }
+  }, [activeTab, preferences.textToSpeech, preferences.language]);
 
   return (
     <div className="flex h-screen bg-gray-50 font-sans">
       
-  
+      {/* SIDEBAR */}
       <aside className="w-64 bg-white border-r border-gray-200 hidden md:flex flex-col justify-between p-6">
         <div>
           <div className="text-xl font-bold text-teal-600 mb-8 tracking-tight flex items-center gap-2">
@@ -59,10 +91,10 @@ function Dash() {
         <div className="text-xs text-gray-400">OneAssist AI v1.0</div>
       </aside>
 
-  
+     
       <div className="flex-1 flex flex-col overflow-hidden">
         
-   
+      
         <header className="flex items-center justify-between px-8 py-4 bg-white border-b border-gray-200">
           <h1 className="text-lg font-semibold text-gray-800">
             {activeTab === 'Dashboard' ? 'Your Accessibility Hub' : activeTab}
@@ -79,15 +111,19 @@ function Dash() {
           </div>
         </header>
 
-  
+      
         <main className="flex-1 overflow-y-auto p-8 space-y-6">
           
-         
           {activeTab === 'Dashboard' && (
             <div className="space-y-6">
-              <div className="p-6 bg-gradient-to-r from-teal-500 to-teal-700 rounded-2xl text-white shadow-md">
-                <h2 className="text-2xl font-bold">Karibu, {fullName}!</h2>
-                <p className="mt-1 text-teal-100 text-sm">Your digital workspace is currently adapted for your comfort and ease of use.</p>
+             
+              <div 
+                onClick={() => speakText(preferences.language === 'Kiswahili' ? `Karibu, ${fullName}!` : `Welcome back, ${fullName}!`, preferences.language)}
+                className="p-6 bg-gradient-to-r from-teal-500 to-teal-700 rounded-2xl text-white shadow-md cursor-pointer hover:opacity-95 transition-opacity"
+                title="Click to read aloud"
+              >
+                <h2 className="text-2xl font-bold">Karibu, {fullName}! 👋</h2>
+                <p className="mt-1 text-teal-100 text-sm">Your digital workspace is currently adapted for your comfort and ease of use. (Click box to hear audio)</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -131,7 +167,6 @@ function Dash() {
             </div>
           )}
 
-        
           {activeTab === 'Accessibility Settings' && (
             <div className="max-w-4xl space-y-6">
               <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm space-y-6">
@@ -160,32 +195,11 @@ function Dash() {
                       {preferences.highContrast ? 'ENABLED' : 'DISABLED'}
                     </button>
                   </div>
-
-                  <div className="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-800">Screen Reader Focus Rings</h4>
-                      <p className="text-xs text-gray-500">Adds prominent outlines around interactable items for keyboard navigation.</p>
-                    </div>
-                    <button onClick={() => togglePreference('screenReader')} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${preferences.screenReader ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
-                      {preferences.screenReader ? 'ENABLED' : 'DISABLED'}
-                    </button>
-                  </div>
-
-                  <div className="flex items-center justify-between p-4 border border-gray-100 rounded-xl bg-gray-50">
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-800">Low-Data & Bandwidth Saver</h4>
-                      <p className="text-xs text-gray-500">Disables heavy background animations and optimizes assets for rural connections.</p>
-                    </div>
-                    <button onClick={() => togglePreference('dataSaver')} className={`px-4 py-1.5 rounded-full text-xs font-semibold ${preferences.dataSaver ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}>
-                      {preferences.dataSaver ? 'ENABLED' : 'DISABLED'}
-                    </button>
-                  </div>
                 </div>
               </div>
             </div>
           )}
 
-       
           {activeTab === 'Language & Voice' && (
             <div className="max-w-4xl space-y-6">
               <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm space-y-6">
@@ -199,8 +213,12 @@ function Dash() {
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Primary Application Language</label>
                     <select 
                       value={preferences.language}
-                      onChange={(e) => setPreferences(p => ({ ...p, language: e.target.value }))}
-                      className="w-full p-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-teal-600"
+                      onChange={(e) => {
+                        const lang = e.target.value;
+                        setPreferences(p => ({ ...p, language: lang }));
+                        speakText(lang === 'Kiswahili' ? 'Lugha imebadilishwa kuwa Kiswahili' : 'Language changed to English', lang);
+                      }}
+                      className="w-full p-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-teal-600 font-medium"
                     >
                       <option value="Kiswahili">Kiswahili</option>
                       <option value="English">English</option>
@@ -216,25 +234,11 @@ function Dash() {
                       {preferences.textToSpeech ? 'ENABLED' : 'DISABLED'}
                     </button>
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">Voice Reader Speed</label>
-                    <select 
-                      value={preferences.voiceSpeed}
-                      onChange={(e) => setPreferences(p => ({ ...p, voiceSpeed: e.target.value }))}
-                      className="w-full p-3 border border-gray-200 rounded-lg text-sm bg-gray-50 focus:outline-teal-600"
-                    >
-                      <option value="0.75x (Slower)">0.75x (Slower)</option>
-                      <option value="1.0x (Normal)">1.0x (Normal)</option>
-                      <option value="1.25x (Faster)">1.25x (Faster)</option>
-                    </select>
-                  </div>
                 </div>
               </div>
             </div>
           )}
 
-        
           {activeTab === 'Help & Support' && (
             <div className="max-w-4xl space-y-6">
               <div className="p-6 bg-white rounded-xl border border-gray-200 shadow-sm space-y-6">
@@ -248,7 +252,7 @@ function Dash() {
                     <div className="w-10 h-10 bg-green-100 text-green-700 rounded-lg flex items-center justify-center font-bold text-lg">💬</div>
                     <h3 className="font-semibold text-gray-800">WhatsApp Instant Support</h3>
                     <p className="text-xs text-gray-500">Chat directly with a human assistant on WhatsApp for low-data guidance.</p>
-                    <button onClick={() => alert("Redirecting to WhatsApp support line...")} className="w-full py-2 bg-green-600 text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-green-700 transition-colors">
+                    <button onClick={() => speakText("Opening WhatsApp chat", preferences.language)} className="w-full py-2 bg-green-600 text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-green-700 transition-colors">
                       Open WhatsApp Chat
                     </button>
                   </div>
@@ -257,17 +261,9 @@ function Dash() {
                     <div className="w-10 h-10 bg-teal-100 text-teal-700 rounded-lg flex items-center justify-center font-bold text-lg">📞</div>
                     <h3 className="font-semibold text-gray-800">Voice Call Back</h3>
                     <p className="text-xs text-gray-500">Request our team to call your phone directly to walk you through settings.</p>
-                    <button onClick={() => alert("Callback request received! An assistant will call you shortly.")} className="w-full py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-teal-700 transition-colors">
+                    <button onClick={() => speakText("Callback request received", preferences.language)} className="w-full py-2 bg-teal-600 text-white text-xs font-semibold rounded-lg shadow-sm hover:bg-teal-700 transition-colors">
                       Request Phone Callback
                     </button>
-                  </div>
-                </div>
-
-                <div className="pt-4 border-t border-gray-100 space-y-3">
-                  <h3 className="font-semibold text-gray-800 text-sm">Frequently Asked Questions</h3>
-                  <div className="space-y-2 text-xs text-gray-600">
-                    <p className="p-3 bg-gray-50 rounded-lg"><strong>Q:</strong> Does data-saving mode affect speech quality?<br /><strong>A:</strong> No, voice scripts are compressed into lightweight audio files that use minimal network data.</p>
-                    <p className="p-3 bg-gray-50 rounded-lg"><strong>Q:</strong> How do I switch languages back to English?<br /><strong>A:</strong> Go to the Language & Voice tab and select English from the dropdown menu.</p>
                   </div>
                 </div>
               </div>
@@ -279,4 +275,5 @@ function Dash() {
     </div>
   );
 }
+
 export default Dash;

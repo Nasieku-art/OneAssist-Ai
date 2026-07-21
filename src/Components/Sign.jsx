@@ -1,6 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Hand,Mail,Lock,User,Eye,EyeOff,Globe,Volume2,ChevronDown,ArrowRight,Check,
+import {
+  Hand,
+  Eye,
+  EyeOff,
+  Globe,
+  Volume2,
+  ChevronDown,
+  ArrowRight,
+  Check,
 } from "lucide-react";
 
 const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
@@ -14,14 +22,17 @@ export default function SignUp() {
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const update = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+  const update = (key) => (e) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
 
   const validate = () => {
     const next = {};
     if (!form.name.trim()) next.name = "Enter your name";
     if (!form.email.trim()) next.email = "Enter your email";
-    else if (!/^\S+@\S+\.\S+$/.test(form.email)) next.email = "Enter a valid email";
-    if (!form.password || form.password.length < 6) next.password = "At least 6 characters";
+    else if (!/^\S+@\S+\.\S+$/.test(form.email))
+      next.email = "Enter a valid email";
+    if (!form.password || form.password.length < 6)
+      next.password = "At least 6 characters";
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -33,9 +44,7 @@ export default function SignUp() {
 
   return (
     <div className="container mx-auto">
- 
       <div className="">
-        
         <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6">
           <button
             type="button"
@@ -71,7 +80,9 @@ export default function SignUp() {
                       setLangOpen(false);
                     }}
                     className={`w-full text-left px-3.5 py-2 text-sm hover:bg-slate-50 ${
-                      l === lang ? "text-teal-600 font-medium" : "text-slate-600"
+                      l === lang
+                        ? "text-teal-600 font-medium"
+                        : "text-slate-600"
                     }`}
                   >
                     {l}
@@ -87,9 +98,12 @@ export default function SignUp() {
             {submitted ? (
               <div className="text-center">
                 <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
-                  <Check className="w-7 h-7 text-emerald-600" strokeWidth={2.5} />
+                  <Check
+                    className="w-7 h-7 text-emerald-600"
+                    strokeWidth={2.5}
+                  />
                 </div>
-                <h1 className="text-2xl font-bold text-slate-900 mb-2" style={{ fontFamily: "'Sora', 'Inter', sans-serif" }}>
+                <h1 className="text-2xl font-bold text-slate-900 mb-2">
                   Account created
                 </h1>
                 <p className="text-slate-500 text-sm mb-6">
@@ -97,18 +111,18 @@ export default function SignUp() {
                 </p>
                 <Link
                   to="/dashboard"
-                  className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold transition-colors"
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-teal-600 text-white text-sm font-semibold "
                 >
                   Continue to dashboard <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
             ) : (
               <>
-                <h1 className="text-2xl font-bold text-slate-900 mb-1" style={{ fontFamily: "'Sora', 'Inter', sans-serif" }}>
+                <h1 className="text-2xl font-bold text-slate-900 mb-1">
                   Create your account
                 </h1>
                 <p className="text-slate-500 text-sm mb-7">
-                  Free for individuals — takes under a minute.
+                  Free for individuals,takes under a minute.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
@@ -117,47 +131,58 @@ export default function SignUp() {
                       Full name
                     </label>
                     <div className="relative">
-                      <User className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         value={form.name}
                         onChange={update("name")}
                         placeholder="Nasieku M."
-                        className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-violet-200 ${
+                        className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.name ? "border-rose-300" : "border-slate-100"
                         }`}
                       />
                     </div>
-                    {errors.name && <p className="mt-1 text-xs text-rose-500">{errors.name}</p>}
+                    {errors.name && (
+                      <p className="mt-1 text-xs text-rose-500">
+                        {errors.name}
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">Email</label>
+                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                      Email
+                    </label>
                     <div className="relative">
-                      <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         type="email"
                         value={form.email}
                         onChange={update("email")}
                         placeholder="you@example.com"
-                        className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-violet-200 ${
+                        className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.email ? "border-rose-300" : "border-slate-100"
                         }`}
                       />
                     </div>
-                    {errors.email && <p className="mt-1 text-xs text-rose-500">{errors.email}</p>}
+                    {errors.email && (
+                      <p className="mt-1 text-xs text-red-300">
+                        {errors.email}
+                      </p>
+                    )}
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">Password</label>
+                    <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                      Password
+                    </label>
                     <div className="relative">
-                      <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
                       <input
                         type={showPassword ? "text" : "password"}
                         value={form.password}
                         onChange={update("password")}
                         placeholder="••••••••"
-                        className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-violet-200 ${
-                          errors.password ? "border-rose-300" : "border-slate-100"
+                        className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
+                          errors.password
+                            ? "border-rose-300"
+                            : "border-slate-100"
                         }`}
                       />
                       <button
@@ -165,10 +190,18 @@ export default function SignUp() {
                         onClick={() => setShowPassword((v) => !v)}
                         className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
                       >
-                        {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        {showPassword ? (
+                          <EyeOff className="w-4 h-4" />
+                        ) : (
+                          <Eye className="w-4 h-4" />
+                        )}
                       </button>
                     </div>
-                    {errors.password && <p className="mt-1 text-xs text-rose-500">{errors.password}</p>}
+                    {errors.password && (
+                      <p className="mt-1 text-xs text-red-300">
+                        {errors.password}
+                      </p>
+                    )}
                   </div>
 
                   <button

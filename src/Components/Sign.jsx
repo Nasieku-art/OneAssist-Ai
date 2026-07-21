@@ -10,7 +10,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
   const [lang, setLang] = useState("English");
   const [langOpen, setLangOpen] = useState(false);
   const [readAloud, setReadAloud] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [form, setForm] = useState({ fullName: "", emailAddress: "", passWord: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -19,12 +19,12 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
   const validate = () => {
     const next = {};
-    if (!form.name.trim()) next.name = "Enter your name";
-    if (!form.email.trim()) next.email = "Enter your email";
-    else if (!/^\S+@\S+\.\S+$/.test(form.email))
+    if (!form.fullName.trim()) next.fullName = "Enter your name";
+    if (!form.emailAddress.trim()) next.emailAddress = "Enter your email";
+    else if (!/^\S+@\S+\.\S+$/.test(form.emailAddress))
       next.email = "Enter a valid email";
-    if (!form.password || form.password.length < 6)
-      next.password = "At least 6 characters";
+    if (!form.passWord || form.passWord.length < 6)
+      next.passWord = "At least 6 characters";
     setErrors(next);
     return Object.keys(next).length === 0;
   };

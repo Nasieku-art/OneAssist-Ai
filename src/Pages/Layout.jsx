@@ -7,7 +7,7 @@ function Layout({ children }) {
       <header>
         <Navbar />
       </header>
-      <main className="flex-grow overflow-y-auto">
+      <main className="flex flex-col h-screen ">
         {children}
       </main>
       <footer>

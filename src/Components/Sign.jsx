@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Hand,
-  Eye,
-  EyeOff,
-  Globe,
-  Volume2,
-  ChevronDown,
-  ArrowRight,
-  Check,
+import {Eye,EyeOff,Globe,Volume2,ChevronDown,ArrowRight,Check,
 } from "lucide-react";
 
 const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
-export default function SignUp() {
+ function Sign() {
   const [showPassword, setShowPassword] = useState(false);
   const [lang, setLang] = useState("English");
   const [langOpen, setLangOpen] = useState(false);
@@ -43,9 +35,9 @@ export default function SignUp() {
   };
 
   return (
-    <div className="container mx-auto">
-      <div className="">
-        <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6">
+    <div className="container mx-auto h-screen overflow-hidden flex flex-col">
+
+        <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6 shrink-0">
           <button
             type="button"
             onClick={() => setReadAloud((v) => !v)}
@@ -93,7 +85,7 @@ export default function SignUp() {
           </div>
         </div>
 
-        <div className="flex-1 flex items-center justify-center px-5 md:px-10 py-8">
+        <div className="flex-1 min-h-0 flex items-center justify-center px-5 md:px-10 py-4 overflow-y-auto">
           <div className="w-full max-w-sm">
             {submitted ? (
               <div className="text-center">
@@ -107,7 +99,7 @@ export default function SignUp() {
                   Account created
                 </h1>
                 <p className="text-slate-500 text-sm mb-6">
-                  You're all set — taking you to your dashboard.
+                  You are all set — taking you to your dashboard.
                 </p>
                 <Link
                   to="/dashboard"
@@ -222,7 +214,8 @@ export default function SignUp() {
             )}
           </div>
         </div>
-      </div>
+
     </div>
   );
 }
+export default Sign;

@@ -23,7 +23,7 @@ function Navbar({ isAuthenticated, fullName, onProfileClick }) {
         <div className="flex items-center gap-6 font-medium text-sm">
           <Link to="/" className="hover:text-indigo-200 transition">Home</Link>
           <Link to="/dashboard" className="hover:text-indigo-200 transition">Dashboard</Link>
-          <Link to="/settings" className="hover:text-indigo-200 transition">Settings</Link>
+
 
         
           {isAuthenticated ? (

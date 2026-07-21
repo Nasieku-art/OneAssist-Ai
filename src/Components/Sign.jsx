@@ -163,35 +163,35 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                      Password
+                      PassWord
                     </label>
                     <div className="relative">
                       <input
-                        type={showPassword ? "text" : "password"}
-                        value={form.password}
-                        onChange={update("password")}
+                        type={showPassWord ? "text" : "passWord"}
+                        value={form.passWord}
+                        onChange={update("passWord")}
                         placeholder="••••••••"
                         className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
-                          errors.password
+                          errors.passWord
                             ? "border-red-400"
                             : "border-slate-100"
                         }`}
                       />
                       <button
                         type="button"
-                        onClick={() => setShowPassword((v) => !v)}
+                        onClick={() => setShowPassWord((v) => !v)}
                         className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
                       >
-                        {showPassword ? (
+                        {showPassWord ? (
                           <EyeOff className="w-4 h-4" />
                         ) : (
                           <Eye className="w-4 h-4" />
                         )}
                       </button>
                     </div>
-                    {errors.password && (
+                    {errors.passWord && (
                       <p className="mt-1 text-xs text-red-400">
-                        {errors.password}
+                        {errors.passWord}
                       </p>
                     )}
                   </div>

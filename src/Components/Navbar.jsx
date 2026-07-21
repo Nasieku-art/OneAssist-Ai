@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
+    <div className="container mx-auto">
     <nav className="bg-teal-600 text-white px-6 py-4 shadow-md flex justify-between items-center">
       <Link to="/" className="text-xl font-bold tracking-wide flex items-center gap-2">
         <span></span> OneAssist AI
@@ -17,6 +18,7 @@ function Navbar() {
         </Link>
       </div>
     </nav>
+    </div>
   );
 }
 

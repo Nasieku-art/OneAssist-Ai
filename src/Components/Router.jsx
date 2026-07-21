@@ -4,7 +4,6 @@ import Home from "../Pages/Home";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Dashboard from "../Pages/Dashboard";
-import Settings from "../Pages/Settings";
 import Accessbility from "../Pages/Accessbility";
 
 function Router() {
@@ -43,14 +42,7 @@ function Router() {
             </Layout>
           }
         />
-        <Route
-          path="/settings"
-          element={
-            <Layout>
-              <Settings />
-            </Layout>
-          }
-        />
+       
         <Route
           path="/Accessbility"
           element={

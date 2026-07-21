@@ -141,7 +141,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                      Email
+                      emailAddress
                     </label>
                     <div className="relative">
                       <input

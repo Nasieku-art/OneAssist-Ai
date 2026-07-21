@@ -128,12 +128,12 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                         onChange={update("name")}
                         placeholder="Mary Nasieku"
                         className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
-                          errors.name ? "border-rose-300" : "border-slate-100"
+                          errors.name ? "border-red-400" : "border-slate-100"
                         }`}
                       />
                     </div>
                     {errors.name && (
-                      <p className="mt-1 text-xs text-rose-500">
+                      <p className="mt-1 text-xs text-red-400">
                         {errors.name}
                       </p>
                     )}
@@ -150,12 +150,12 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                         onChange={update("email")}
                         placeholder="you@gmail.com"
                         className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
-                          errors.email ? "border-rose-300" : "border-slate-100"
+                          errors.email ? "border-red-400" : "border-slate-100"
                         }`}
                       />
                     </div>
                     {errors.email && (
-                      <p className="mt-1 text-xs text-red-300">
+                      <p className="mt-1 text-xs text-red-400">
                         {errors.email}
                       </p>
                     )}
@@ -173,7 +173,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                         placeholder="••••••••"
                         className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.password
-                            ? "border-red-300"
+                            ? "border-red-400"
                             : "border-slate-100"
                         }`}
                       />
@@ -190,7 +190,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                       </button>
                     </div>
                     {errors.password && (
-                      <p className="mt-1 text-xs text-red-300">
+                      <p className="mt-1 text-xs text-red-400">
                         {errors.password}
                       </p>
                     )}

@@ -126,7 +126,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                       <input
                         value={form.name}
                         onChange={update("name")}
-                        placeholder="Nasieku M."
+                        placeholder="Mary Nasieku"
                         className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.name ? "border-rose-300" : "border-slate-100"
                         }`}
@@ -148,7 +148,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                         type="email"
                         value={form.email}
                         onChange={update("email")}
-                        placeholder="you@example.com"
+                        placeholder="you@gmail.com"
                         className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.email ? "border-rose-300" : "border-slate-100"
                         }`}
@@ -173,7 +173,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                         placeholder="••••••••"
                         className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
                           errors.password
-                            ? "border-rose-300"
+                            ? "border-red-300"
                             : "border-slate-100"
                         }`}
                       />

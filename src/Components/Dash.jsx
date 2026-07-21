@@ -40,7 +40,7 @@ export default function OneAssistDashboard() {
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Help & Support</a>
           </nav>
         </div>
-        <div className="text-xs text-gray-400">OneAssist AI v1.0 (Demo)</div>
+        <div className="text-xs text-gray-400">OneAssist AI</div>
       </aside>
 
     

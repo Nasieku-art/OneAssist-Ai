@@ -9,7 +9,7 @@ const getInitials = (fullName) => {
 };
 
 export default function OneAssistDashboard() {
-  const [fullName] = useState('Amina Mwangi');
+  const [fullName] = useState('Mary Nasieku');
   
   
   const [preferences, setPreferences] = useState({
@@ -34,7 +34,7 @@ export default function OneAssistDashboard() {
             OneAssist <span className="text-xs px-2 py-0.5 bg-indigo-100 text-teal-700 rounded-full font-normal">AI</span>
           </div>
           <nav className="space-y-2">
-            <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-teal-600 bg-indigo-50 rounded-lg">Dashboard</a>
+            <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-teal-600 bg-teal-200 rounded-lg">Dashboard</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Accessibility Settings</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Language & Voice</a>
             <a href="#" className="flex items-center gap-3 px-4 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg">Help & Support</a>
@@ -53,7 +53,7 @@ export default function OneAssistDashboard() {
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium text-gray-700 hidden sm:inline">{fullName}</span>
             <div 
-              className="flex items-center justify-center w-10 h-10 font-semibold text-white bg-indigo-600 rounded-full shadow-sm select-none"
+              className="flex items-center justify-center w-10 h-10 font-semibold text-white bg-teal-600 rounded-full shadow-sm select-none"
               title={fullName}
             >
               {getInitials(fullName)}
@@ -66,7 +66,7 @@ export default function OneAssistDashboard() {
           
          
               <div className="p-6 bg-gradient-to-r from-teal-300 to-teal-600 rounded-2xl text-white shadow-md">
-            <h2 className="text-2xl font-bold">Karibu, {fullName}! 👋</h2>
+            <h2 className="text-2xl font-bold">Karibu, {fullName}!</h2>
             <p className="mt-1 text-indigo-100 text-sm">Your digital workspace is currently adapted for your comfort and ease of use.</p>
           </div>
 
@@ -99,7 +99,7 @@ export default function OneAssistDashboard() {
                 <span className="text-sm font-medium text-gray-700">Larger Text Mode</span>
                 <button 
                   onClick={() => togglePreference('largeText')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.largeText ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.largeText ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}
                 >
                   {preferences.largeText ? 'ON' : 'OFF'}
                 </button>
@@ -109,7 +109,7 @@ export default function OneAssistDashboard() {
                 <span className="text-sm font-medium text-gray-700">Text-to-Speech (Read Aloud)</span>
                 <button 
                   onClick={() => togglePreference('textToSpeech')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.textToSpeech ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.textToSpeech ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}
                 >
                   {preferences.textToSpeech ? 'ON' : 'OFF'}
                 </button>
@@ -119,7 +119,7 @@ export default function OneAssistDashboard() {
                 <span className="text-sm font-medium text-gray-700">High Contrast Mode</span>
                 <button 
                   onClick={() => togglePreference('highContrast')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.highContrast ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.highContrast ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}
                 >
                   {preferences.highContrast ? 'ON' : 'OFF'}
                 </button>
@@ -129,7 +129,7 @@ export default function OneAssistDashboard() {
                 <span className="text-sm font-medium text-gray-700">Data-Saving Mode</span>
                 <button 
                   onClick={() => togglePreference('dataSaver')}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.dataSaver ? 'bg-indigo-600 text-white' : 'bg-gray-200 text-gray-600'}`}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${preferences.dataSaver ? 'bg-teal-600 text-white' : 'bg-gray-200 text-gray-600'}`}
                 >
                   {preferences.dataSaver ? 'ON' : 'OFF'}
                 </button>

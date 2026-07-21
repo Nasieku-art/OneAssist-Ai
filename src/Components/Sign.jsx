@@ -35,9 +35,9 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
   };
 
   return (
-    <div className="container mx-auto h-screen overflow-hidden flex flex-col">
+    <div className="container mx-auto flex flex-col">
 
-        <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6 shrink-0">
+        <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6 ">
           <button
             type="button"
             onClick={() => setReadAloud((v) => !v)}

@@ -1,14 +1,12 @@
 import React from 'react';
 import {GlobeCheck,LibraryBig,GlobeOff,EyeDashed,PersonStanding,Scale} from "lucide-react"
 
- function Hero() {
+function Hero() {
   return (
     <div className="container mx-auto">
-    {/* <div className="bg-white font-sans text-gray-900"> */}
-      
       <header className="px-8 py-20 md:py-28 text-center max-w-4xl mx-auto space-y-6">
-        <span className="inline-block  px-4 py-1 text-xs font-semibold text-teal-600 bg-indigo-50 rounded-full border border-indigo-100">
-          <GlobeCheck /> Technology that adapts to everyone.
+        <span className="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold text-teal-600 bg-teal-50 rounded-full border border-teal-100">
+          <GlobeCheck className="w-3.5 h-3.5" /> Technology that adapts to everyone.
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
           Making the digital world accessible for <span className="text-teal-600">everyone</span>.
@@ -26,7 +24,6 @@ import {GlobeCheck,LibraryBig,GlobeOff,EyeDashed,PersonStanding,Scale} from "luc
         </div>
       </header>
 
-      
       <section id="problem" className="px-8 py-20 bg-gray-50 border-t border-gray-100">
         <div className="max-w-5xl mx-auto space-y-12">
           <div className="text-center space-y-3">
@@ -69,17 +66,16 @@ import {GlobeCheck,LibraryBig,GlobeOff,EyeDashed,PersonStanding,Scale} from "luc
         </div>
       </section>
 
-     
       <section id="solution" className="px-8 py-20 bg-white">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className="space-y-6">
-            <span className="text-xs font-bold text-teal-600 uppercase tracking-widest bg-indigo-50 px-3 py-1 rounded-full">💡 The Solution</span>
+            <span className="text-xs font-bold text-teal-600 uppercase tracking-widest bg-teal-50 px-3 py-1 rounded-full">💡 The Solution</span>
             <h2 className="text-3xl font-bold text-gray-900">Personalization over separate platforms.</h2>
             <p className="text-gray-600 leading-relaxed">
               Instead of creating separate websites for different users, OneAssist AI learns each user's preferences and automatically adapts the interface to meet their needs.
             </p>
-            <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100 space-y-2">
-              <p className="text-xs font-bold text-indigo-900 uppercase">Onboarding Philosophy</p>
+            <div className="p-4 bg-teal-50 rounded-xl border border-teal-100 space-y-2">
+              <p className="text-xs font-bold text-teal-900 uppercase">Onboarding Philosophy</p>
               <p className="text-sm text-gray-700 italic">❌ Instead of asking: "What disability do you have?"</p>
               <p className="text-sm font-semibold text-teal-700">✔ We ask: "How can we make OneAssist AI easier for you to use?"</p>
             </div>
@@ -98,8 +94,7 @@ import {GlobeCheck,LibraryBig,GlobeOff,EyeDashed,PersonStanding,Scale} from "luc
           </div>
         </div>
       </section>
-</div>
-    // </div>
+    </div>
   );
 }
 

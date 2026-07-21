@@ -120,7 +120,7 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                 <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   <div>
                     <label className="block text-xs font-semibold text-slate-600 mb-1.5">
-                      Full name
+                      fullName
                     </label>
                     <div className="relative">
                       <input

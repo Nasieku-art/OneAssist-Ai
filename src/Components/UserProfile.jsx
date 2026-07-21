@@ -1,8 +1,8 @@
+const getInitials=(fullName)
+
 function UserProfile(){
     return(
-        <div>
-            heeeeeeeeelo
-        </div>
+        
 
     )
 }

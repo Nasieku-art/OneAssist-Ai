@@ -1,0 +1,214 @@
+import React, { useState } from "react";
+import { useAuth } from "./Auth";
+import { Link } from "react-router-dom";
+import {Eye,EyeOff,Globe,Volume2,ChevronDown,ArrowRight,Check,} from "lucide-react";
+
+const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
+
+function Log() {
+  const { login } = useAuth();
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [lang, setLang] = useState("English");
+  const [langOpen, setLangOpen] = useState(false);
+  const [readAloud, setReadAloud] = useState(false);
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const update = (key) => (e) =>
+    setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const validate = () => {
+    const next = {};
+    if (!form.email.trim()) next.email = "Enter your email";
+    else if (!/^\S+@\S+\.\S+$/.test(form.email))
+      next.email = "Enter a valid email";
+    if (!form.password || form.password.length < 6)
+      next.password = "At least 6 characters";
+    setErrors(next);
+    return Object.keys(next).length === 0;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setApiError("");
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+    try {
+      await login(form.email, form.password);
+      setSubmitted(true);
+    } catch (err) {
+      setApiError(err.message || "Invalid email or password.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="container mx-auto h-full flex flex-col">
+      <div className="flex items-center justify-end gap-2 px-5 md:px-10 pt-6 shrink-0">
+        <button
+          type="button"
+          onClick={() => setReadAloud((v) => !v)}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium border transition-colors ${
+            readAloud
+              ? "bg-teal-50 border-teal-200 text-teal-700"
+              : "bg-white border-slate-200 text-slate-500"
+          }`}
+        >
+          <Volume2 className="w-3.5 h-3.5" />
+          Read aloud {readAloud ? "on" : "off"}
+        </button>
+
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setLangOpen((v) => !v)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-white border border-slate-200 text-slate-600"
+          >
+            <Globe className="w-3.5 h-3.5" />
+            {lang}
+            <ChevronDown className="w-3 h-3" />
+          </button>
+          {langOpen && (
+            <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl border border-slate-200 shadow-lg py-1.5 z-10">
+              {LANGUAGES.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  onClick={() => {
+                    setLang(l);
+                    setLangOpen(false);
+                  }}
+                  className={`w-full text-left px-3.5 py-2 text-sm hover:bg-slate-50 ${
+                    l === lang ? "text-teal-600 font-medium" : "text-slate-600"
+                  }`}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="flex-1 min-h-0 flex items-center justify-center px-5 md:px-10 py-4 overflow-y-auto">
+        <div className="w-full max-w-sm">
+          {submitted ? (
+            <div className="text-center">
+              <div className="w-14 h-14 rounded-2xl bg-emerald-50 flex items-center justify-center mx-auto mb-5">
+                <Check className="w-7 h-7 text-emerald-600" strokeWidth={2.5} />
+              </div>
+              <h1 className="text-2xl font-bold text-slate-900 mb-2">
+                Welcome back
+              </h1>
+              <p className="text-slate-500 text-sm mb-6">
+                Good to see you again — taking you to your dashboard.
+              </p>
+              <Link
+                to="/dashboard"
+                className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-teal-600 text-white text-sm font-semibold "
+              >
+                Continue to dashboard <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          ) : (
+            <>
+              <h1 className="text-2xl font-bold text-slate-900 mb-1">
+                Log in to OneAssist
+              </h1>
+              <p className="text-slate-500 text-sm mb-7">
+                Welcome back, let's pick up where you left off.
+              </p>
+
+              <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-600 mb-1.5">
+                    Email
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={form.email}
+                      onChange={update("email")}
+                      placeholder="you@example.com"
+                      className={`w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
+                        errors.email ? "border-rose-300" : "border-slate-100"
+                      }`}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p className="mt-1 text-xs text-red-300">{errors.email}</p>
+                  )}
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <label className="block text-xs font-semibold text-slate-600">
+                      Password
+                    </label>
+                    <button type="button" className="text-xs font-medium text-teal-600">
+                      Forgot password?
+                    </button>
+                  </div>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={form.password}
+                      onChange={update("password")}
+                      placeholder="••••••••"
+                      className={`w-full pl-10 pr-10 py-3 rounded-xl bg-slate-50 border text-sm outline-none focus:ring-2 focus:ring-teal-800 ${
+                        errors.password ? "border-rose-300" : "border-slate-100"
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400"
+                    >
+                      {showPassword ? (
+                        <EyeOff className="w-4 h-4" />
+                      ) : (
+                        <Eye className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
+                  {errors.password && (
+                    <p className="mt-1 text-xs text-red-300">{errors.password}</p>
+                  )}
+                </div>
+
+                {apiError && (
+                  <p className="text-center text-xs text-rose-500 -mt-1">
+                    {apiError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-teal-600 text-white text-sm font-semibold mt-2 disabled:opacity-60"
+                >
+                  {isSubmitting ? "Logging in..." : "Log in"}{" "}
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+
+              <p className="text-center text-xs text-slate-400 mt-6">
+                Don't have an account?{" "}
+                <Link to="/signup" className="text-teal-600 font-semibold">
+                  Sign up
+                </Link>
+              </p>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+export default Log;

@@ -1,12 +1,12 @@
-import Sign from "../Components/Sign";
-function SignUp(){
+import React from "react";
+import Log from "../Components/Log";
+
+function Login() {
     return(
-        <div>
-
-            <Sign/>
-
+        <div className="min-h-screen bg-white">
+            <Log />
         </div>
-
-    )
+    );
 }
-export default SignUp;
+
+export default Login;

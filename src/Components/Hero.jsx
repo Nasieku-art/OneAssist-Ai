@@ -6,7 +6,7 @@ function Hero() {
     <div className="container mx-auto">
       <header className="px-8 py-20 md:py-28 text-center max-w-4xl mx-auto space-y-6">
         <span className="inline-flex items-center gap-2 px-4 py-1 text-xs font-semibold text-teal-600 bg-teal-50 rounded-full border border-teal-100">
-          <GlobeCheck className="w-3.5 h-3.5" /> Technology that adapts to everyone.
+          <GlobeCheck className="w-3.5 h-3.5" /> Technology that adapts to people, <span className='font-bold text-teal-400'>NOT</span>people adapting to Technology.
         </span>
         <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900 leading-tight">
           Making the digital world accessible for <span className="text-teal-600">everyone</span>.
@@ -76,8 +76,8 @@ function Hero() {
             </p>
             <div className="p-4 bg-teal-50 rounded-xl border border-teal-100 space-y-2">
               <p className="text-xs font-bold text-teal-900 uppercase">Onboarding Philosophy</p>
-              <p className="text-sm text-gray-700 italic">❌ Instead of asking: "What disability do you have?"</p>
-              <p className="text-sm font-semibold text-teal-700">✔ We ask: "How can we make OneAssist AI easier for you to use?"</p>
+              <p className="text-sm text-gray-700 italic"> Instead of asking: "What disability do you have?"</p>
+              <p className="text-sm font-semibold text-teal-700"> We ask: "How can we make OneAssist AI easier for you to use?"</p>
             </div>
           </div>
 

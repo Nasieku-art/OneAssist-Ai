@@ -16,7 +16,7 @@ function UserProfile(){
     return(
         
 <div  onClick={onClick}
-      className="flex items-center justify-center w-10 h-10 font-semibold text-white bg-indigo-600 rounded-full shadow-sm cursor-pointer select-none hover:bg-indigo-700 transition-colors"
+      className="flex items-center justify-center w-10 h-10 font-semibold text-white bg-teal-900 rounded-full shadow-sm cursor-pointer select-none hover:bg-indigo-700 transition-colors"
       title={fullName || 'User Profile'}>
     {getInitials(fullName)}
 

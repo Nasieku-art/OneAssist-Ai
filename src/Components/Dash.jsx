@@ -196,8 +196,7 @@ const ORG_TYPES = [
 ];
 
 function Dash() {
-  // fullName and accessibilityPreference now come from the real logged-in
-  // user (AuthContext), not a hardcoded placeholder.
+  
   const { fullName: authFullName, accessibilityPreference, logout } = useAuth();
   const fullName = authFullName || "there";
   const navigate = useNavigate();
@@ -239,8 +238,7 @@ function Dash() {
     voiceSpeed: 1.0,
   });
 
-  // On first load, apply whatever accessibility profile the user picked at
-  // signup — same effect as tapping one of the profile cards below.
+  
   useEffect(() => {
     if (!accessibilityPreference || accessibilityPreference === "none") return;
     const match = PROFILES.find((p) => p.key === accessibilityPreference);
@@ -248,7 +246,7 @@ function Dash() {
       setPreferences((prev) => ({ ...prev, ...match.prefs }));
       setActiveProfile(match.key);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+   
   }, [accessibilityPreference]);
 
   const [isListening, setIsListening] = useState(false);
@@ -297,8 +295,7 @@ function Dash() {
         `Sasa umewekewa mpangilio wa ${profile.name.Kiswahili}.`,
         `Your interface is now adjusted for ${profile.name.English}.`,
       );
-      // Pass setTtsStatus so failures (no voices installed, blocked
-      // playback, unsupported browser) show up instead of failing silently.
+     
       speakText(
         msg,
         lang,
@@ -461,13 +458,8 @@ function Dash() {
             : "Use clear, plain language with shorter sentences. Avoid jargon and complex words.";
         prompt = `Rewrite the following text to be much easier to read. ${levelInstruction} ${langInstruction} Only return the rewritten text, with no preamble or explanation.\n\nText:\n${simplifyInput}`;
       }
-
-      // NOTE: this now calls our own backend (which holds the Anthropic API
-      // key and proxies the request server-side) instead of calling
-      // api.anthropic.com directly from the browser. Calling Anthropic
-      // directly from client-side JS triggers a CORS error, since their API
-      // doesn't send Access-Control-Allow-Origin headers for browser
-      // requests, and would also expose the API key to anyone using devtools.
+console.log("Sending prompt to backend:", prompt);
+     
       const response = await fetch("http://localhost:5000/api/ai/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -1,12 +1,10 @@
-import React from "react";
-import Sign from "../Components/Sign";
 
+import Sign
 function SignUp() {
-    return(
-        <div className="min-h-screen bg-white">
-            <Sign />
-        </div>
-    );
+  return (
+    <div>
+      <Sign />
+    </div>
+  );
 }
-
 export default SignUp;

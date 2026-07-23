@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useAuth } from "../Auth"; // Adjust relative path to your Auth context if needed
+import { useAuth } from "../Auth"; 
 import { Link, useNavigate } from "react-router-dom";
 import {
   Eye,
@@ -49,7 +49,7 @@ function Sign() {
 
     setIsSubmitting(true);
     try {
-      // Matches backend & AuthContext: fullName, email, password, accessibilityPreference
+      
       await signup(form.fullName, form.email, form.password, "none");
       setSubmitted(true);
     } catch (err) {

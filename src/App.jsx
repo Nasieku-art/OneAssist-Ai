@@ -1,6 +1,5 @@
-import React from "react";
-import Router from "./Router/Router"; 
-import { AuthProvider } from "./Components/Auth"; 
+import Router from "./Components/Router";
+import { AuthProvider } from "./Components/Auth";
 
 function App() {
   return (

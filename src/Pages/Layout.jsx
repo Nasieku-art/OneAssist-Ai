@@ -1,7 +1,6 @@
-import React from "react";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
-import { useAuth } from "../context/AuthContext"; 
+import { useAuth } from "../Components/Auth";
 
 function Layout({ children }) {
   const { isAuthenticated, fullName, logout } = useAuth();

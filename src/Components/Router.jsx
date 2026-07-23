@@ -5,7 +5,8 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import Dashboard from "../Pages/Dashboard";
 import Accessbility from "../Pages/Accessbility";
-import ProtectedRoute from "./ProtectedRoute";
+import ProtectedRoute from "./Protect";
+
 
 function Router() {
   return (

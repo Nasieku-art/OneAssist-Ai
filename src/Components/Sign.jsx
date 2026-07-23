@@ -1,11 +1,21 @@
 import React, { useState } from "react";
+import { useAuth } from "./Auth";
 import { Link } from "react-router-dom";
-import {Eye,EyeOff,Globe,Volume2,ChevronDown,ArrowRight,Check,
+import {
+  Eye,
+  EyeOff,
+  Globe,
+  Volume2,
+  ChevronDown,
+  ArrowRight,
+  Check,
 } from "lucide-react";
 
 const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
 
- function Sign() {
+function Sign() {
+  const { signup } = useAuth();
+
   const [showPassword, setShowPassword] = useState(false);
   const [lang, setLang] = useState("English");
   const [langOpen, setLangOpen] = useState(false);
@@ -13,6 +23,8 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const update = (key) => (e) =>
     setForm((f) => ({ ...f, [key]: e.target.value }));
@@ -29,9 +41,20 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
     return Object.keys(next).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validate()) setSubmitted(true);
+    setApiError("");
+    if (!validate()) return;
+
+    setIsSubmitting(true);
+    try {
+      await signup(form.name, form.email, form.password, "none");
+      setSubmitted(true);
+    } catch (err) {
+      setApiError(err.message || "Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -196,11 +219,19 @@ const LANGUAGES = ["English", "Kiswahili", "Kikuyu", "Luo", "Kamba"];
                     )}
                   </div>
 
+                  {apiError && (
+                    <p className="text-center text-xs text-rose-500 -mt-1">
+                      {apiError}
+                    </p>
+                  )}
+
                   <button
                     type="submit"
-                    className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-teal-600 text-white text-sm font-semibold  mt-2"
+                    disabled={isSubmitting}
+                    className="w-full flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-teal-600 text-white text-sm font-semibold mt-2 disabled:opacity-60"
                   >
-                    Create account <ArrowRight className="w-4 h-4" />
+                    {isSubmitting ? "Creating account..." : "Create account"}{" "}
+                    <ArrowRight className="w-4 h-4" />
                   </button>
                 </form>
 

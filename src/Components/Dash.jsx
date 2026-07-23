@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { LayoutDashboard,PersonStanding,Speech,Headset,Phone,MessageCircleCheck,Mic,MicOff,Sparkles,Ear,Eye,GraduationCap,Wifi,BookOpen,Users,School,Building2,HeartPulse,Volume2,Loader2,CheckCircle2,} from "lucide-react";
-import { useAuth } from "../Components/Auth.js";
+import { useAuth } from "./Auth.jsx";
 
 const getInitials = (fullName) => {
   if (!fullName) return "U";

@@ -1,14 +1,13 @@
 import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);
-const API_BASE = "http://localhost:5000/api/auth"; // adjust to match your backend's actual URL/prefix
-
+const API_BASE = "http://localhost:5000/api/auth"; 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [loading, setLoading] = useState(true);
 
-  // On app load, if a token exists, verify it and fetch the real user
+ 
   useEffect(() => {
     const init = async () => {
       const storedToken = localStorage.getItem("token");

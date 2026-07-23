@@ -1,6 +1,9 @@
-import { AuthProvider } from "./Components/Auth";
-import Router from "./Components/Router";
 
+
+App · JSX
+import Router from "./Components/Router";
+import { AuthProvider } from "./Components/Auth";
+ 
 function App() {
   return (
     <AuthProvider>
@@ -8,5 +11,6 @@ function App() {
     </AuthProvider>
   );
 }
-
+ 
 export default App;
+ 

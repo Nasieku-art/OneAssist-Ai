@@ -34,25 +34,9 @@ function Router() {
             </Layout>
           }
         />
-        <Route
-          path="/dashboard"
-          element={
-            <Layout>
-              <Dashboard />
-            </Layout>
-          }
-        />
-       
-        <Route
-          path="/Accessbility"
-          element={
-            <Layout>
-              <Accessbility />
-            </Layout>
-          }
-        />
 
-
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/Accessbility" element={<Accessbility />} />
       </Routes>
     </BrowserRouter>
   );

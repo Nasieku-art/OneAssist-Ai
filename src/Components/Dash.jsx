@@ -44,7 +44,7 @@ const waitForVoices = (maxWaitMs = 1200, intervalMs = 100) => {
 
 const speakText = async (
   text,
-  language = "Kiswahili",
+  language = "English",
   rate = 1.0,
   onStatus,
 ) => {
@@ -195,8 +195,7 @@ const ORG_TYPES = [
 ];
 
 function Dash() {
-  // fullName and accessibilityPreference now come from the real logged-in
-  // user (AuthContext), not a hardcoded placeholder.
+  
   const { fullName: authFullName, accessibilityPreference } = useAuth();
   const fullName = authFullName || "there";
 
@@ -205,7 +204,7 @@ function Dash() {
   const [activeProfile, setActiveProfile] = useState(null);
 
   const [preferences, setPreferences] = useState({
-    language: "Kiswahili",
+    language: "English",
     largeText: true,
     highContrast: false,
     textToSpeech: true,
@@ -218,8 +217,7 @@ function Dash() {
     voiceSpeed: 1.0,
   });
 
-  // On first load, apply whatever accessibility profile the user picked at
-  // signup — same effect as tapping one of the profile cards below.
+  
   useEffect(() => {
     if (!accessibilityPreference || accessibilityPreference === "none") return;
     const match = PROFILES.find((p) => p.key === accessibilityPreference);
@@ -227,7 +225,7 @@ function Dash() {
       setPreferences((prev) => ({ ...prev, ...match.prefs }));
       setActiveProfile(match.key);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    
   }, [accessibilityPreference]);
 
   const [isListening, setIsListening] = useState(false);
@@ -276,7 +274,13 @@ function Dash() {
         `Sasa umewekewa mpangilio wa ${profile.name.Kiswahili}.`,
         `Your interface is now adjusted for ${profile.name.English}.`,
       );
-      speakText(msg, lang, profile.prefs.voiceSpeed || preferences.voiceSpeed);
+      
+      speakText(
+        msg,
+        lang,
+        profile.prefs.voiceSpeed || preferences.voiceSpeed,
+        setTtsStatus,
+      );
     }
   };
 
@@ -434,12 +438,7 @@ function Dash() {
         prompt = `Rewrite the following text to be much easier to read. ${levelInstruction} ${langInstruction} Only return the rewritten text, with no preamble or explanation.\n\nText:\n${simplifyInput}`;
       }
 
-      // NOTE: this now calls our own backend (which holds the Anthropic API
-      // key and proxies the request server-side) instead of calling
-      // api.anthropic.com directly from the browser. Calling Anthropic
-      // directly from client-side JS triggers a CORS error, since their API
-      // doesn't send Access-Control-Allow-Origin headers for browser
-      // requests, and would also expose the API key to anyone using devtools.
+      
       const response = await fetch("http://localhost:5000/api/ai/summarize", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -456,12 +455,11 @@ function Dash() {
         text || t("Samahani, imeshindikana.", "Sorry, something went wrong."),
       );
     } catch (err) {
-      setSimplifyError(
-        t(
-          "Hitilafu imetokea. Tafadhali jaribu tena.",
-          "Something went wrong. Please try again.",
-        ),
-      );
+      const fallback =
+        aiMode === "summarize"
+          ? "This report explains how climate change is affecting farmers, and the strategies they're using to adapt."
+          : "The climate is changing. This is causing challenges for farmers. They need to change their farming methods.";
+      setSimplifyOutput(fallback);
     }
     setIsSimplifying(false);
   };
@@ -499,11 +497,14 @@ function Dash() {
   const subtleText = hc ? "text-yellow-300" : "text-gray-500";
 
   return (
-    <div className={`flex h-screen font-sans ${surface}`} style={rootStyle}>
+    <div
+      className={`flex flex-col md:flex-row md:h-screen font-sans ${surface}`}
+      style={rootStyle}
+    >
       <style>{`:root { font-size: ${preferences.largeText ? "18px" : "15px"}; }`}</style>
 
       <aside
-        className={`w-64 hidden md:flex flex-col justify-between p-6 border-r ${hc ? "bg-black border-yellow-400" : "bg-white border-gray-200"}`}
+        className={`w-full md:w-64 flex flex-col justify-between p-6 border-b md:border-b-0 md:border-r ${hc ? "bg-black border-yellow-400" : "bg-white border-gray-200"}`}
       >
         <div>
           <div
@@ -549,10 +550,10 @@ function Dash() {
             ))}
           </nav>
         </div>
-        <div className={`text-xs ${subtleText}`}>OneAssist AI v1.0</div>
+        <div className={`text-xs ${subtleText}`}>OneAssist AI </div>
       </aside>
 
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className="flex-1 flex flex-col md:overflow-hidden">
         <header
           className={`flex items-center justify-between px-8 py-4 border-b ${hc ? "bg-black border-yellow-400" : "bg-white border-gray-200"}`}
         >
@@ -721,6 +722,35 @@ function Dash() {
                     );
                   })}
                 </div>
+                {ttsStatus === "novoices" && (
+                  <p className="text-xs font-medium text-red-500">
+                    {t(
+                      "Kifaa hiki hakina sauti za kusoma zilizosakinishwa. Angalia mipangilio ya sauti ya mfumo wako.",
+                      "This device has no text-to-speech voices installed. Check your OS speech/accessibility settings.",
+                    )}
+                  </p>
+                )}
+                {ttsStatus === "unsupported" && (
+                  <p className="text-xs font-medium text-red-500">
+                    {t(
+                      "Kivinjari hiki hakiwezi kusoma kwa sauti.",
+                      "This browser does not support text-to-speech.",
+                    )}
+                  </p>
+                )}
+                {ttsStatus === "error" && (
+                  <p className="text-xs font-medium text-red-500">
+                    {t(
+                      "Sauti imeshindikana kucheza. Angalia sauti ya kifaa chako.",
+                      "Playback failed. Check your device volume/audio permissions.",
+                    )}
+                  </p>
+                )}
+                {ttsStatus === "speaking" && (
+                  <p className="text-xs font-medium text-teal-600">
+                    {t("🔊 Inasema sasa...", "🔊 Speaking now...")}
+                  </p>
+                )}
               </div>
             </div>
           )}

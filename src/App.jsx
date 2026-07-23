@@ -1,6 +1,4 @@
 
-
-App · JSX
 import Router from "./Components/Router";
 import { AuthProvider } from "./Components/Auth";
  

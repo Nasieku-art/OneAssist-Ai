@@ -11,9 +11,9 @@ const getInitials = (fullName) => {
 
 function Navbar({ isAuthenticated, fullName, onProfileClick }) {
   return (
-    <div className="container mx-auto">
+  
       <nav className="bg-teal-600 text-white px-6 py-4 shadow-md flex justify-between items-center">
-
+<div className="container mx-auto">
         <Link to="/" className="text-xl font-bold tracking-wide flex items-center gap-2">
           <span></span> OneAssist AI
         </Link>

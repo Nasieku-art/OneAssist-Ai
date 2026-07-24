@@ -1,9 +1,10 @@
 
-import Sign
+import Sign from "../Components/Sign";
+
 function SignUp() {
   return (
     <div>
-      <Sign />
+  <Sign/>
     </div>
   );
 }
